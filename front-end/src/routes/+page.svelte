@@ -92,42 +92,50 @@
 {/if}
 
 <style>
-
     .living-room {
         display: grid;
-        grid-template-columns: 320px 1fr 320px;
-        gap: 1rem;
+        grid-template-columns: 380px 1.5fr 380px;
+        gap: 0.5rem;
         align-items: center;
-        height: 85vh;
-        padding: 0 2rem;
+        height: 95vh;
+        padding: 0 1rem;
+        background: radial-gradient(circle, rgba(0,0,0,0) 40%, rgba(0,0,0,0.8) 100%);
     }
 
     .shelf {
         position: relative;
-        width: 320px;
-        height: 540px;
+        width: 380px;
+        height: 700px;
+        display: flex;
+        flex-direction: column;
         overflow: hidden;
     }
 
     .shelf-bg {
         position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         object-fit: fill;
         z-index: 1;
     }
 
     .shelf-content {
         position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         z-index: 2;
     }
 
     .shelf h3 {
         font-family: monospace;
-        font-size: 0.8rem;
+        font-size: 1rem;
         color: rgba(255,255,255,0.4);
         text-align: center;
-        margin-top: 15px;
+        margin-top: 25px;
     }
 
     .disc-btn, .shelf-object {
@@ -140,9 +148,9 @@
     }
 
     .disc-btn img, .shelf-object img {
-        width: 65px;
+        width: 85px;
         height: auto;
-        filter: drop-shadow(2px 4px 5px rgba(0,0,0,0.8));
+        filter: drop-shadow(4px 6px 8px rgba(0,0,0,0.9));
     }
 
     .disc-btn:hover, .shelf-object:hover {
@@ -171,7 +179,10 @@
 
     .modal-overlay {
         position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         background: rgba(0,0,0,0.85);
         display: flex;
         justify-content: center;
@@ -189,9 +200,19 @@
         box-shadow: 15px 15px 0px #000;
     }
 
-    .modal-content h2 { margin-top: 0; font-size: 1.2rem; }
-    .modal-content ul { padding-left: 20px; font-size: 0.9rem; }
-    .modal-content li { margin-bottom: 10px; }
+    .modal-content h2 {
+        margin-top: 0;
+        font-size: 1.2rem;
+    }
+
+    .modal-content ul {
+        padding-left: 20px;
+        font-size: 0.9rem;
+    }
+
+    .modal-content li {
+        margin-bottom: 10px;
+    }
 
     .close-btn {
         margin-top: 20px;
@@ -203,15 +224,87 @@
         font-family: monospace;
     }
 
-    .setup { display: flex; flex-direction: column; align-items: center; }
-    .tv-container { position: relative; width: 550px; }
-    .tv-frame-img { width: 100%; display: block; position: relative; z-index: 10; pointer-events: none; }
-    .screen-mask { position: absolute; top: 12%; left: 11%; width: 78%; height: 70%; background: #000; z-index: 1; display: flex; justify-content: center; align-items: center; }
-    .scanlines { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%); background-size: 100% 4px; z-index: 5; pointer-events: none; }
-    .ps2-container { position: relative; width: 300px; margin-top: -20px; }
-    .ps2-img { width: 100%; }
-    .game-boot, .not-recg { color: #fff; font-family: 'Courier New', monospace; text-align: center; }
-    .glow-text { font-size: 1.2rem; text-shadow: 0 0 8px #fff; }
-    .status-msg { font-size: 0.7rem; color: #888; }
-    .start-btn { display: inline-block; margin-top: 10px; padding: 5px 15px; background: #0044ff; color: white; text-decoration: none; border: 1px solid white; font-size: 0.8rem; }
+    .setup {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tv-container {
+        position: relative;
+        width: 100%;
+        max-width: 850px;
+    }
+
+    .tv-frame-img {
+        width: 100%;
+        display: block;
+        position: relative;
+        z-index: 10;
+        pointer-events: none;
+    }
+
+    .screen-mask {
+        position: absolute;
+        top: 11.5%;
+        left: 10.5%;
+        width: 79%;
+        height: 71%;
+        background: #000;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .scanlines {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+        background-size: 100% 3px;
+        z-index: 5;
+        pointer-events: none;
+        opacity: 0.4;
+    }
+
+    .ps2-container {
+        position: relative;
+        width: 500px;
+        margin-top: -60px;
+    }
+
+    .ps2-img {
+        width: 100%;
+    }
+
+    .game-boot, .not-recg {
+        color: #fff;
+        font-family: 'Courier New', monospace;
+        text-align: center;
+    }
+
+    .glow-text {
+        font-size: 1.5rem;
+        text-shadow: 0 0 8px #fff;
+    }
+
+    .status-msg {
+        font-size: 0.8rem;
+        color: #888;
+    }
+
+    .start-btn {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 8px 20px;
+        background: #0044ff;
+        color: white;
+        text-decoration: none;
+        border: 1px solid white;
+        font-size: 0.9rem;
+    }
 </style>
